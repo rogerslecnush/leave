@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Traits\MemberOfTeam;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes, MemberOfTeam;
 
     /**
      * The attributes that are mass assignable.
