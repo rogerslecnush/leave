@@ -3,13 +3,14 @@
 namespace App;
 
 use App\Traits\MemberOfTeam;
+use App\Traits\SlugTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes, MemberOfTeam;
+    use Notifiable, SoftDeletes, MemberOfTeam, SlugTrait;
 
     /**
      * The attributes that are mass assignable.
