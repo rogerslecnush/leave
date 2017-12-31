@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class TeamApiTest extends TestCase
 {
@@ -25,75 +25,76 @@ class TeamApiTest extends TestCase
     }
 
     /**
-     * List the teams
+     * List the teams.
      *
      * @test
+     *
      * @return void
      */
     public function get_all_teams()
     {
-        $response = $this->call("GET", "api/teams");
+        $response = $this->call('GET', 'api/teams');
         $response->assertSuccessful();
         $response->assertJsonCount($this->teamCount + 3, null);
     }
 
     /**
-     * Get a team (with users)
+     * Get a team (with users).
      *
      * @test
      */
     public function get_a_team()
     {
-        $response = $this->call("GET", "api/teams/" . $this->team->id);
+        $response = $this->call('GET', 'api/teams/'.$this->team->id);
         $response->assertSuccessful();
-        $response->assertJsonFragment(["name"]);
-        $response->assertJsonFragment(["slug"]);
-        $response->assertJsonFragment(["users"]);
+        $response->assertJsonFragment(['name']);
+        $response->assertJsonFragment(['slug']);
+        $response->assertJsonFragment(['users']);
     }
 
     /**
-     * Store a team
+     * Store a team.
      *
      * @test
      */
     public function store_a_team()
     {
-        $response = $this->post("api/teams", ["name" => "Twimm"]);
+        $response = $this->post('api/teams', ['name' => 'Twimm']);
 
         // Returns created object
         $response->assertSuccessful();
-        $response->assertJsonFragment(["name"]);
-        $response->assertJsonFragment(["slug"]);
+        $response->assertJsonFragment(['name']);
+        $response->assertJsonFragment(['slug']);
 
         // Saves object
-        $this->assertDatabaseHas("teams", ["name" => "Twimm"]);
+        $this->assertDatabaseHas('teams', ['name' => 'Twimm']);
     }
 
     /**
-     * Update a team
+     * Update a team.
      *
      * @test
      */
     public function update_a_team()
     {
-        $response = $this->patch("api/teams/" . $this->team->id, ["name" => "Twimm"]);
+        $response = $this->patch('api/teams/'.$this->team->id, ['name' => 'Twimm']);
 
         $response->assertSuccessful();
-        $response->assertJsonFragment(["name"]);
-        $response->assertJsonFragment(["slug"]);
+        $response->assertJsonFragment(['name']);
+        $response->assertJsonFragment(['slug']);
     }
 
     /**
-     * SoftDelete a team
+     * SoftDelete a team.
      *
      * @test
      */
     public function delete_a_team()
     {
-        $response = $this->delete("api/teams/" . $this->team->id);
+        $response = $this->delete('api/teams/'.$this->team->id);
 
         $response->assertSuccessful();
 
-        $this->assertSoftDeleted("teams", ["id" => $this->team->id]);
+        $this->assertSoftDeleted('teams', ['id' => $this->team->id]);
     }
 }
