@@ -26,53 +26,56 @@ class TeamAssignTest extends TestCase
     }
 
     /**
-     * Get a team (with users)
+     * Get a team (with users).
      *
      * @test
+     *
      * @return void
      */
     public function get_a_team()
     {
-        $response = $this->call("GET", "api/teams/" . $this->teams->first()->id);
+        $response = $this->call('GET', 'api/teams/'.$this->teams->first()->id);
         $response->assertSuccessful();
-        $response->assertJsonFragment(["users"]);
-        $response->assertJsonCount(3, "users");
+        $response->assertJsonFragment(['users']);
+        $response->assertJsonCount(3, 'users');
     }
 
     /**
-     * Assign an User to a team
+     * Assign an User to a team.
      *
      * @test
+     *
      * @return void
      */
     public function assigns_a_member_to_a_team()
     {
-        $response = $this->call("GET", "api/teams/" . $this->teams->first()->id . "/users/" . $this->user->id);
+        $response = $this->call('GET', 'api/teams/'.$this->teams->first()->id.'/users/'.$this->user->id);
 
         $response->assertSuccessful();
-        $this->assertDatabaseHas("team_user", ["user_id" => $this->user->id, "team_id" => $this->teams->first()->id]);
+        $this->assertDatabaseHas('team_user', ['user_id' => $this->user->id, 'team_id' => $this->teams->first()->id]);
     }
 
     public function unassign_a_member_to_a_team()
     {
-        $response = $this->call("GET", "api/teams/" . $this->teams->first()->id . "/users/" . $this->user->id);
-        $response = $this->delete("api/teams/" . $this->teams->first()->id . "/users/" . $this->user->id);
+        $response = $this->call('GET', 'api/teams/'.$this->teams->first()->id.'/users/'.$this->user->id);
+        $response = $this->delete('api/teams/'.$this->teams->first()->id.'/users/'.$this->user->id);
 
         $response->assertSuccessful();
-        $this->assertDatabaseMissing("team_user", ["user_id" => $this->user->id, "team_id" => $this->teams->first()->id]);
+        $this->assertDatabaseMissing('team_user', ['user_id' => $this->user->id, 'team_id' => $this->teams->first()->id]);
     }
 
     /**
-     * Reset team members
+     * Reset team members.
      *
      * @test
+     *
      * @return void
      */
     public function reset_team_members()
     {
-        $response = $this->delete("api/teams/" . $this->teams->first()->id . "/users");
+        $response = $this->delete('api/teams/'.$this->teams->first()->id.'/users');
 
         $response->assertSuccessful();
-        $this->assertDatabaseMissing("team_user", ["team_id" => $this->teams->first()->id]);
+        $this->assertDatabaseMissing('team_user', ['team_id' => $this->teams->first()->id]);
     }
 }

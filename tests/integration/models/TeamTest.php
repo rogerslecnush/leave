@@ -11,7 +11,7 @@ class TeamTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * Will run before tests
+     * Will run before tests.
      *
      * @return void
      */
@@ -19,17 +19,18 @@ class TeamTest extends TestCase
     {
         parent::setUp();
 
-        $team = Team::create(["name" => "Twimm"]);
+        $team = Team::create(['name' => 'Twimm']);
     }
 
     /**
-     * Check slug field
+     * Check slug field.
      *
      * @test
+     *
      * @return void
      */
     public function it_has_a_slug()
     {
-        $this->assertDatabaseHas("teams", ["name" => "Twimm", "slug" => "twimm"]);
+        $this->assertDatabaseHas('teams', ['name' => 'Twimm', 'slug' => 'twimm']);
     }
 }

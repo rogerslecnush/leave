@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Model;
@@ -13,8 +14,9 @@ trait SlugTrait
      *
      * @link http://chrishayes.ca/blog/code/laravel-4-generating-unique-slugs-elegantly
      *
-     * @param Model $model
+     * @param Model  $model
      * @param string $value
+     *
      * @return string
      */
     private function getUniqueSlug(Model $model, $value)

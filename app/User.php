@@ -5,8 +5,8 @@ namespace App;
 use App\Traits\MemberOfTeam;
 use App\Traits\SlugTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {

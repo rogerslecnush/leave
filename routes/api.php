@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource("teams", "TeamController", ["except" => ["create", "edit"]]);
+Route::resource('teams', 'TeamController', ['except' => ['create', 'edit']]);
 
-Route::resource("teams.users", "TeamUserController", ["except" => ["create", "edit", "update"]]);
-Route::delete("teams/{team}/users/{user}", "TeamUserController@undo")->name("teams.users.undo");
-Route::delete("teams/{team}/users", "TeamUserController@destroy")->name("teams.users.destroy");
+Route::resource('teams.users', 'TeamUserController', ['except' => ['create', 'edit', 'update']]);
+Route::delete('teams/{team}/users/{user}', 'TeamUserController@undo')->name('teams.users.undo');
+Route::delete('teams/{team}/users', 'TeamUserController@destroy')->name('teams.users.destroy');
