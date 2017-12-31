@@ -26,17 +26,6 @@ class TeamAssignTest extends TestCase
     }
 
     /**
-     * Check the members are correctly inserted in GET
-     *
-     * @test
-     * @return void
-     */
-    public function get_team_contains_members()
-    {
-        $this->assertTrue(true);
-    }
-
-    /**
      * Get a team (with users)
      *
      * @test
