@@ -28,10 +28,12 @@ trait SlugTrait
     public static function bootSlugTrait()
     {
         static::creating(function ($model) {
-            $model->attributes['slug'] = $model->getUniqueSlug($model, $model->name);
+            if(env("DB_CONNECTION") !== "sqlite") $model->attributes['slug'] = $model->getUniqueSlug($model, $model->name);
+            if(env("DB_CONNECTION") == "sqlite") $model->attributes['slug'] = Str::slug($model->name);
         });
         static::updating(function ($model) {
-            $model->attributes['slug'] = $model->getUniqueSlug($model, $model->name);
+            if(env("DB_CONNECTION") !== "sqlite") $model->attributes['slug'] = $model->getUniqueSlug($model, $model->name);
+            if(env("DB_CONNECTION") == "sqlite") $model->attributes['slug'] = Str::slug($model->name);
         });
     }
 }
