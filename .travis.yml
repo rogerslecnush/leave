@@ -1,0 +1,24 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+
+services:
+  - mysql
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - composer install --no-progress --no-interaction --prefer-dist --no-suggest
+  - mysql -e 'CREATE DATABASE homestead;'
+  - cp .env.travis .env
+
+script:
+  - vendor/bin/phpunit
+
+notifications:
+  email: false
