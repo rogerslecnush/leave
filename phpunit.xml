@@ -13,6 +13,10 @@
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
 
+        <testsuite name="IntegrationModels">
+            <directory suffix="Test.php">./tests/integration/models</directory>
+        </testsuite>
+
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
