@@ -15,9 +15,9 @@ class UsersTableSeeder extends Seeder
         factory(\App\User::class)->times(10)->create();
 
         for ($i = 1; $i <= 10; $i++) {
-            DB::table("team_user")->insert([
-                "user_id" => $i,
-                "team_id" => rand(1,2)
+            DB::table('team_user')->insert([
+                'user_id' => $i,
+                'team_id' => rand(1, 2),
             ]);
         }
     }
